@@ -63,5 +63,5 @@
   },
   "source": "src/index.jsx",
   "unpkg": "dist/ReactCountUp.min.js",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
