@@ -1,5 +1,5 @@
 import React from 'react';
-import _isFunction from 'lodash-es/isFunction';
+import isFunction from 'lodash-es/isFunction';
 import CountUp from 'countup.js';
 
 function _classCallCheck(instance, Constructor) {
@@ -95,28 +95,22 @@ var ReactCountUp =
   (function(_React$Component) {
     _inherits(ReactCountUp, _React$Component);
 
-    _createClass(ReactCountUp, null, [
-      {
-        key: 'getDerivedStateFromProps',
-        // static propTypes = {
-        //   className: PropTypes.string,
-        //   delay: PropTypes.number,
-        //   startVal: PropTypes.number,
-        //   endVal: PropTypes.number,
-        //   decimals: PropTypes.number,
-        //   duration: PropTypes.number,
-        //   options: PropTypes.object,
-        //   onReady: PropTypes.func,
-        //   onComplete: PropTypes.func,
-        //   onUpdate: PropTypes.func,
-        //   onError: PropTypes.func,
-        // };
-        value: function getDerivedStateFromProps(nextProps, prevState) {
-          return null;
-        },
-      },
-    ]);
-
+    // static propTypes = {
+    //   className: PropTypes.string,
+    //   delay: PropTypes.number,
+    //   startVal: PropTypes.number,
+    //   endVal: PropTypes.number,
+    //   decimals: PropTypes.number,
+    //   duration: PropTypes.number,
+    //   options: PropTypes.object,
+    //   onReady: PropTypes.func,
+    //   onComplete: PropTypes.func,
+    //   onUpdate: PropTypes.func,
+    //   onError: PropTypes.func,
+    // };
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //   return null;
+    // }
     function ReactCountUp(props) {
       var _this;
 
@@ -145,7 +139,7 @@ var ReactCountUp =
 
         var instance = new CountUp(that.dom, startVal, endVal, decimals, duration, options);
 
-        if (instance.error && _isFunction(onError)) {
+        if (instance.error && isFunction(onError)) {
           return onError(instance.error);
         }
 
@@ -153,7 +147,7 @@ var ReactCountUp =
           instance: instance,
         });
 
-        if (!forceUpdate && _isFunction(onReady)) {
+        if (!forceUpdate && isFunction(onReady)) {
           onReady(instance, CountUp);
         }
 
@@ -186,7 +180,7 @@ var ReactCountUp =
           that.updateValue(endVal);
         }
 
-        if (_isFunction(onUpdate)) {
+        if (isFunction(onUpdate)) {
           onUpdate(instance, CountUp);
         }
       });
@@ -222,11 +216,11 @@ var ReactCountUp =
         }
 
         return instance.start(function() {
-          if (_isFunction(callback)) {
+          if (isFunction(callback)) {
             callback(instance, CountUp);
           }
 
-          if (_isFunction(onComplete)) {
+          if (isFunction(onComplete)) {
             onComplete(instance, CountUp);
           }
         });

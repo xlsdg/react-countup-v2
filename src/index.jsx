@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 // import _ from 'lodash-es';
-import _isFunction from 'lodash-es/isFunction';
+import isFunction from 'lodash-es/isFunction';
 import CountUp from 'countup.js';
 
 export default class ReactCountUp extends React.Component {
@@ -43,10 +43,9 @@ export default class ReactCountUp extends React.Component {
     onError: () => {},
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   return null;
+  // }
 
   constructor(props) {
     super(props);
@@ -98,7 +97,7 @@ export default class ReactCountUp extends React.Component {
 
     const instance = new CountUp(that.dom, startVal, endVal, decimals, duration, options);
 
-    if (instance.error && _isFunction(onError)) {
+    if (instance.error && isFunction(onError)) {
       return onError(instance.error);
     }
 
@@ -106,7 +105,7 @@ export default class ReactCountUp extends React.Component {
       instance,
     });
 
-    if (!forceUpdate && _isFunction(onReady)) {
+    if (!forceUpdate && isFunction(onReady)) {
       onReady(instance, CountUp);
     }
 
@@ -131,7 +130,7 @@ export default class ReactCountUp extends React.Component {
       that.updateValue(endVal);
     }
 
-    if (_isFunction(onUpdate)) {
+    if (isFunction(onUpdate)) {
       onUpdate(instance, CountUp);
     }
   };
@@ -165,11 +164,11 @@ export default class ReactCountUp extends React.Component {
     }
 
     return instance.start(() => {
-      if (_isFunction(callback)) {
+      if (isFunction(callback)) {
         callback(instance, CountUp);
       }
 
-      if (_isFunction(onComplete)) {
+      if (isFunction(onComplete)) {
         onComplete(instance, CountUp);
       }
     });

@@ -262,28 +262,22 @@
     (function(_React$Component) {
       _inherits(ReactCountUp, _React$Component);
 
-      _createClass(ReactCountUp, null, [
-        {
-          key: 'getDerivedStateFromProps',
-          // static propTypes = {
-          //   className: PropTypes.string,
-          //   delay: PropTypes.number,
-          //   startVal: PropTypes.number,
-          //   endVal: PropTypes.number,
-          //   decimals: PropTypes.number,
-          //   duration: PropTypes.number,
-          //   options: PropTypes.object,
-          //   onReady: PropTypes.func,
-          //   onComplete: PropTypes.func,
-          //   onUpdate: PropTypes.func,
-          //   onError: PropTypes.func,
-          // };
-          value: function getDerivedStateFromProps(nextProps, prevState) {
-            return null;
-          },
-        },
-      ]);
-
+      // static propTypes = {
+      //   className: PropTypes.string,
+      //   delay: PropTypes.number,
+      //   startVal: PropTypes.number,
+      //   endVal: PropTypes.number,
+      //   decimals: PropTypes.number,
+      //   duration: PropTypes.number,
+      //   options: PropTypes.object,
+      //   onReady: PropTypes.func,
+      //   onComplete: PropTypes.func,
+      //   onUpdate: PropTypes.func,
+      //   onError: PropTypes.func,
+      // };
+      // static getDerivedStateFromProps(nextProps, prevState) {
+      //   return null;
+      // }
       function ReactCountUp(props) {
         var _this;
 
