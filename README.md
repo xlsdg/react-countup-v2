@@ -22,7 +22,6 @@ export default () => {
   return (
     <ReactCountUp
       delay={10}
-      startVal={0}
       endVal={1000}
       onReady={onReady}
       onComplete={onComplete}
@@ -38,10 +37,7 @@ export default () => {
 ``` javascript
 className: PropTypes.string,
 delay: PropTypes.number,
-startVal: PropTypes.number,
 endVal: PropTypes.number,
-decimals: PropTypes.number,
-duration: PropTypes.number,
 options: PropTypes.object,
 onReady: PropTypes.func,
 onComplete: PropTypes.func,
