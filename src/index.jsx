@@ -1,17 +1,14 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 // import _ from 'lodash-es';
-import isFunction from 'lodash-es/isFunction';
+import _isFunction from 'lodash-es/isFunction';
 import CountUp from 'countup.js';
 
 export default class ReactCountUp extends React.Component {
   // static propTypes = {
   //   className: PropTypes.string,
-  //   delay: PropTypes.number,
-  //   startVal: PropTypes.number,
   //   endVal: PropTypes.number,
-  //   decimals: PropTypes.number,
-  //   duration: PropTypes.number,
+  //   delay: PropTypes.number,
   //   options: PropTypes.object,
   //   onReady: PropTypes.func,
   //   onComplete: PropTypes.func,
@@ -21,14 +18,16 @@ export default class ReactCountUp extends React.Component {
 
   static defaultProps = {
     className: null,
-    delay: 0,
-    startVal: 0,
     endVal: 100,
-    decimals: 0,
-    duration: 2,
+    delay: 0,
     options: {
+      startVal: 0,
+      decimalPlaces: 0,
+      duration: 2,
       useEasing: true,
       useGrouping: true,
+      smartEasingThreshold: 999,
+      smartEasingAmount: 333,
       separator: ',',
       decimal: '.',
       easingFn: null,
@@ -64,14 +63,11 @@ export default class ReactCountUp extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     const that = this;
     // console.log('shouldComponentUpdate', that.props, nextProps, that.state, nextState);
-    const { className, startVal, endVal, decimals, duration, options } = that.props;
+    const { className, endVal, options } = that.props;
 
     const isUpdate =
       className !== nextProps.className ||
-      startVal !== nextProps.startVal ||
       endVal !== nextProps.endVal ||
-      decimals !== nextProps.decimals ||
-      duration !== nextProps.duration ||
       options !== nextProps.options;
 
     return isUpdate;
@@ -89,15 +85,15 @@ export default class ReactCountUp extends React.Component {
 
   init = (forceUpdate = false) => {
     const that = this;
-    const { delay, startVal, endVal, decimals, duration, options, onReady, onError } = that.props;
+    const { delay, endVal, options, onReady, onError } = that.props;
 
     if (!that.dom) {
       return;
     }
 
-    const instance = new CountUp(that.dom, startVal, endVal, decimals, duration, options);
+    const instance = new CountUp(that.dom, endVal, options);
 
-    if (instance.error && isFunction(onError)) {
+    if (instance.error && _isFunction(onError)) {
       return onError(instance.error);
     }
 
@@ -105,7 +101,7 @@ export default class ReactCountUp extends React.Component {
       instance,
     });
 
-    if (!forceUpdate && isFunction(onReady)) {
+    if (!forceUpdate && _isFunction(onReady)) {
       onReady(instance, CountUp);
     }
 
@@ -115,13 +111,9 @@ export default class ReactCountUp extends React.Component {
   update = (prevProps, prevState) => {
     const that = this;
     const { instance } = that.state;
-    const { startVal, endVal, decimals, duration, options, onUpdate } = that.props;
+    const { endVal, options, onUpdate } = that.props;
 
-    const isUpdate =
-      startVal !== prevProps.startVal ||
-      decimals !== prevProps.decimals ||
-      duration !== prevProps.duration ||
-      options !== prevProps.options;
+    const isUpdate = options !== prevProps.options;
 
     if (isUpdate) {
       that.init(true);
@@ -130,7 +122,7 @@ export default class ReactCountUp extends React.Component {
       that.updateValue(endVal);
     }
 
-    if (isFunction(onUpdate)) {
+    if (_isFunction(onUpdate)) {
       onUpdate(instance, CountUp);
     }
   };
@@ -164,11 +156,11 @@ export default class ReactCountUp extends React.Component {
     }
 
     return instance.start(() => {
-      if (isFunction(callback)) {
+      if (_isFunction(callback)) {
         callback(instance, CountUp);
       }
 
-      if (isFunction(onComplete)) {
+      if (_isFunction(onComplete)) {
         onComplete(instance, CountUp);
       }
     });
