@@ -1,15 +1,13 @@
 (function(global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined'
-    ? (module.exports = factory(require('react'), require('lodash-es/_isFunction'), require('countup.js')))
+    ? (module.exports = factory(require('react'), require('countup.js')))
     : typeof define === 'function' && define.amd
-    ? define(['react', 'lodash-es/_isFunction', 'countup.js'], factory)
-    : (global.ReactCountUp = factory(global.React, global._isFunction, global.CountUp));
-})(this, function(React, _isFunction, CountUp) {
+    ? define(['react', 'countup.js'], factory)
+    : (global.ReactCountUp = factory(global.React, global.CountUp));
+})(this, function(React, countup_js) {
   'use strict';
 
   React = React && React.hasOwnProperty('default') ? React['default'] : React;
-  _isFunction = _isFunction && _isFunction.hasOwnProperty('default') ? _isFunction['default'] : _isFunction;
-  CountUp = CountUp && CountUp.hasOwnProperty('default') ? CountUp['default'] : CountUp;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -99,6 +97,165 @@
     return _assertThisInitialized(self);
   }
 
+  /** Detect free variable `global` from Node.js. */
+  var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+  /** Detect free variable `self`. */
+  var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+  /** Used as a reference to the global object. */
+  var root = freeGlobal || freeSelf || Function('return this')();
+
+  /** Built-in value references. */
+  var Symbol$1 = root.Symbol;
+
+  /** Used for built-in method references. */
+  var objectProto = Object.prototype;
+
+  /** Used to check objects for own properties. */
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  /**
+   * Used to resolve the
+   * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+   * of values.
+   */
+  var nativeObjectToString = objectProto.toString;
+
+  /** Built-in value references. */
+  var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : undefined;
+
+  /**
+   * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+   *
+   * @private
+   * @param {*} value The value to query.
+   * @returns {string} Returns the raw `toStringTag`.
+   */
+  function getRawTag(value) {
+    var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+    try {
+      value[symToStringTag] = undefined;
+    } catch (e) {}
+
+    var result = nativeObjectToString.call(value);
+    {
+      if (isOwn) {
+        value[symToStringTag] = tag;
+      } else {
+        delete value[symToStringTag];
+      }
+    }
+    return result;
+  }
+
+  /** Used for built-in method references. */
+  var objectProto$1 = Object.prototype;
+
+  /**
+   * Used to resolve the
+   * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+   * of values.
+   */
+  var nativeObjectToString$1 = objectProto$1.toString;
+
+  /**
+   * Converts `value` to a string using `Object.prototype.toString`.
+   *
+   * @private
+   * @param {*} value The value to convert.
+   * @returns {string} Returns the converted string.
+   */
+  function objectToString(value) {
+    return nativeObjectToString$1.call(value);
+  }
+
+  /** `Object#toString` result references. */
+  var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+  /** Built-in value references. */
+  var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : undefined;
+
+  /**
+   * The base implementation of `getTag` without fallbacks for buggy environments.
+   *
+   * @private
+   * @param {*} value The value to query.
+   * @returns {string} Returns the `toStringTag`.
+   */
+  function baseGetTag(value) {
+    if (value == null) {
+      return value === undefined ? undefinedTag : nullTag;
+    }
+    return symToStringTag$1 && symToStringTag$1 in Object(value) ? getRawTag(value) : objectToString(value);
+  }
+
+  /**
+   * Checks if `value` is the
+   * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+   * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+   * @example
+   *
+   * _.isObject({});
+   * // => true
+   *
+   * _.isObject([1, 2, 3]);
+   * // => true
+   *
+   * _.isObject(_.noop);
+   * // => true
+   *
+   * _.isObject(null);
+   * // => false
+   */
+  function isObject(value) {
+    var type = typeof value;
+    return value != null && (type == 'object' || type == 'function');
+  }
+
+  /** `Object#toString` result references. */
+  var asyncTag = '[object AsyncFunction]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    proxyTag = '[object Proxy]';
+
+  /**
+   * Checks if `value` is classified as a `Function` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+   * @example
+   *
+   * _.isFunction(_);
+   * // => true
+   *
+   * _.isFunction(/abc/);
+   * // => false
+   */
+  function isFunction(value) {
+    if (!isObject(value)) {
+      return false;
+    }
+    // The use of `Object#toString` avoids issues with the `typeof` operator
+    // in Safari 9 which returns 'object' for typed arrays and other constructors.
+    var tag = baseGetTag(value);
+    return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+  }
+
   var ReactCountUp =
     /*#__PURE__*/
     (function(_React$Component) {
@@ -140,9 +297,9 @@
             return;
           }
 
-          var instance = new CountUp(that.dom, endVal, options);
+          var instance = new countup_js.CountUp(that.dom, endVal, options);
 
-          if (instance.error && _isFunction(onError)) {
+          if (instance.error && isFunction(onError)) {
             return onError(instance.error);
           }
 
@@ -150,8 +307,8 @@
             instance: instance,
           });
 
-          if (!forceUpdate && _isFunction(onReady)) {
-            onReady(instance, CountUp);
+          if (!forceUpdate && isFunction(onReady)) {
+            onReady(instance, countup_js.CountUp);
           }
 
           setTimeout(function() {
@@ -176,8 +333,8 @@
             that.updateValue(endVal);
           }
 
-          if (_isFunction(onUpdate)) {
-            onUpdate(instance, CountUp);
+          if (isFunction(onUpdate)) {
+            onUpdate(instance, countup_js.CountUp);
           }
         });
 
@@ -212,12 +369,12 @@
           }
 
           return instance.start(function() {
-            if (_isFunction(callback)) {
-              callback(instance, CountUp);
+            if (isFunction(callback)) {
+              callback(instance, countup_js.CountUp);
             }
 
-            if (_isFunction(onComplete)) {
-              onComplete(instance, CountUp);
+            if (isFunction(onComplete)) {
+              onComplete(instance, countup_js.CountUp);
             }
           });
         });

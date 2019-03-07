@@ -5,8 +5,8 @@ function _interopDefault(ex) {
 }
 
 var React = _interopDefault(require('react'));
-var _isFunction = _interopDefault(require('lodash-es/_isFunction'));
-var CountUp = _interopDefault(require('countup.js'));
+var _isFunction = _interopDefault(require('lodash-es/isFunction'));
+var countup_js = require('countup.js');
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -137,7 +137,7 @@ var ReactCountUp =
           return;
         }
 
-        var instance = new CountUp(that.dom, endVal, options);
+        var instance = new countup_js.CountUp(that.dom, endVal, options);
 
         if (instance.error && _isFunction(onError)) {
           return onError(instance.error);
@@ -148,7 +148,7 @@ var ReactCountUp =
         });
 
         if (!forceUpdate && _isFunction(onReady)) {
-          onReady(instance, CountUp);
+          onReady(instance, countup_js.CountUp);
         }
 
         setTimeout(function() {
@@ -174,7 +174,7 @@ var ReactCountUp =
         }
 
         if (_isFunction(onUpdate)) {
-          onUpdate(instance, CountUp);
+          onUpdate(instance, countup_js.CountUp);
         }
       });
 
@@ -210,11 +210,11 @@ var ReactCountUp =
 
         return instance.start(function() {
           if (_isFunction(callback)) {
-            callback(instance, CountUp);
+            callback(instance, countup_js.CountUp);
           }
 
           if (_isFunction(onComplete)) {
-            onComplete(instance, CountUp);
+            onComplete(instance, countup_js.CountUp);
           }
         });
       });

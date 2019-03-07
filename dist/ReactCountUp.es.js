@@ -1,6 +1,6 @@
 import React from 'react';
-import _isFunction from 'lodash-es/_isFunction';
-import CountUp from 'countup.js';
+import _isFunction from 'lodash-es/isFunction';
+import { CountUp } from 'countup.js';
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {

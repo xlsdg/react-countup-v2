@@ -2,7 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 // import _ from 'lodash-es';
 import _isFunction from 'lodash-es/isFunction';
-import CountUp from 'countup.js';
+import { CountUp } from 'countup.js';
 
 export default class ReactCountUp extends React.Component {
   // static propTypes = {
