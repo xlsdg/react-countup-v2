@@ -1,30 +1,25 @@
 {
-  "author": "xLsDg <xlsdg@qq.com> (https://blog.xlsdg.org/)",
-  "browser": "dist/ReactCountUp.js",
+  "author": "xLsDg <xlsdg@qq.com> (https://xlsdg.org/)",
+  "browser": "dist/countup.umd.min.js",
   "bugs": {
     "url": "https://github.com/xlsdg/react-countup-v2/issues"
   },
-  "dependencies": {
-    "lodash-es": "latest"
-  },
-  "description": "React component wrap for CountUp.js",
+  "description": "A CountUp component for React",
   "devDependencies": {
-    "bili": "^3.4.2",
-    "eslint": "^5.14.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-alloy": "^1.4.2",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "prettier": "^1.16.4",
-    "rollup-plugin-prettier": "^0.6.0",
-    "rollup-plugin-vue": "^4.7.2",
-    "stylelint": "^9.10.1",
-    "stylelint-config-prettier": "^5.0.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-order": "^2.0.0",
-    "vue-template-compiler": "^2.6.7"
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "babel-eslint": "^10.0.1",
+    "bili": "^4.8.0",
+    "eslint": "^5.16.0",
+    "eslint-config-alloy": "^2.0.2",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "prettier": "^1.18.0"
   },
   "engines": {
     "node": ">=8",
@@ -35,21 +30,19 @@
     "src"
   ],
   "homepage": "https://github.com/xlsdg/react-countup-v2",
-  "jsdelivr": "dist/ReactCountUp.min.js",
+  "jsdelivr": "dist/countup.min.js",
   "keywords": [
-    "countup.js",
-    "library",
     "react",
+    "countup",
     "react-countup",
-    "react-countup-v2"
+    "library"
   ],
   "license": "MIT",
-  "main": "dist/ReactCountUp.cjs.js",
-  "module": "dist/ReactCountUp.es.js",
+  "main": "dist/countup.min.js",
+  "module": "dist/countup.esm.min.js",
   "name": "react-countup-v2",
   "peerDependencies": {
-    "react": "latest",
-    "countup.js": "latest"
+    "react": "latest"
   },
   "repository": {
     "type": "git",
@@ -61,7 +54,7 @@
     "release:minor": "npm version minor && npm publish",
     "release:patch": "npm version patch && npm publish"
   },
-  "source": "src/index.jsx",
-  "unpkg": "dist/ReactCountUp.min.js",
+  "source": "src/countup.jsx",
+  "unpkg": "dist/countup.min.js",
   "version": "2.0.1"
 }

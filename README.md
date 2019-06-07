@@ -4,7 +4,7 @@
 
 ## Installation
 
-```
+```bash
 $ npm install --save countup.js react-countup-v2
 ```
 
@@ -75,6 +75,6 @@ onUpdate: () => {},
 onError: () => {},
 ```
 
-# License
+## License
 
 MIT
