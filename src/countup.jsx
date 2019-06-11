@@ -211,7 +211,7 @@ export default class ReactCountUp extends React.PureComponent {
 
     return (
       <span ref={that.dom} className={className}>
-        {children}
+        {children || null}
       </span>
     );
   }
