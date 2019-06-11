@@ -56,5 +56,5 @@
   },
   "source": "src/countup.jsx",
   "unpkg": "dist/countup.min.js",
-  "version": "3.0.0"
+  "version": "3.0.1"
 }
